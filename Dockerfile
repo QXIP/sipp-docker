@@ -27,7 +27,7 @@ RUN ./get_sipp.sh -v "v${SIPP_VERSION}" \
   && ./build.sh --with-sctp --with-pcap --with-openssl 
 
 RUN apt-get install -y git \
-  && git clone https://github.com/saghul/sipp-scenarios
+  && git clone https://github.com/lmangani/sipp-scenarios
 
 FROM ubuntu:18.04
 
@@ -47,6 +47,8 @@ COPY --from=0 /lib/x86_64-linux-gnu/libdl.so.2 /app/lib
 COPY --from=0 /usr/lib/x86_64-linux-gnu/libsctp.so.1 /app/lib
 COPY --from=0 /lib/x86_64-linux-gnu/libgcc_s.so.1 /app/lib
 COPY --from=0 /lib/x86_64-linux-gnu/libc.so.6 /app/lib
+
+WORKDIR /app
 
 ENV PATH="/app:$PATH"
 ENV LD_LIBRARY_PATH="/app/lib:$LD_LIBRARY_PATH"

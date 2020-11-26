@@ -8,7 +8,7 @@ services:
       - 3060
     ports:
       - "3060:3060/udp"
-    command: -p 3060 -sn uas
+    command: -p 3060 -sf /app/sipp_uas_register_ignore.xml -m 100
 
   sippuac:
     image: qxip/sipp
@@ -20,4 +20,4 @@ services:
       - 3062
     ports:
       - "3062:3062/udp"
-    command: -p 3062 -sn uac sippuas:3060 -m 100 -l 10
+    command: -p 3062 -sf /app/sipp_uac_register_dumb.xml sippuas:3060 -m 100 -l 10 -inf /app/register_data.csv
