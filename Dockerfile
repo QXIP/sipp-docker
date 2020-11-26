@@ -27,7 +27,7 @@ RUN ./get_sipp.sh -v "v${SIPP_VERSION}" \
   && ./build.sh --with-sctp --with-pcap --with-openssl 
 
 RUN apt-get install -y git \
-  && git clone https://github.com/lmangani/sipp-scenarios
+  && git clone https://github.com/saghul/sipp-scenarios
 
 FROM ubuntu:18.04
 

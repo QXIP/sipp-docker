@@ -1,7 +1,7 @@
 version: '3'
 services:
   sippuas:
-    image: sipp
+    image: qxip/sipp
     container_name: sippuas
     restart: always
     expose:
@@ -11,7 +11,7 @@ services:
     command: -p 3060 -sn uas
 
   sippuac:
-    image: sipp
+    image: qxip/sipp
     container_name: sippuac
     depends_on:
       - sippuas
