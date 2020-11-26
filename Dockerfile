@@ -26,15 +26,11 @@ RUN ./get_sipp.sh -v "v${SIPP_VERSION}" \
   && cd sipp \
   && ./build.sh --with-sctp --with-pcap --with-openssl 
 
-RUN apt-get install -y git \
-  && git clone https://github.com/lmangani/sipp-scenarios
-
 FROM ubuntu:18.04
 
 RUN mkdir -p /app/lib
 
 COPY --from=0 /app/sipp/sipp /app/sipp
-COPY --from=0 /app/sipp-scenarios/* /app/
 COPY --from=0 /usr/lib/x86_64-linux-gnu/libpcap.so.0.8 /app/lib
 COPY --from=0 /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 /app/lib
 COPY --from=0 /usr/lib/x86_64-linux-gnu/libssl.so.1.1 /app/lib

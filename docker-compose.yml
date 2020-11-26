@@ -4,6 +4,8 @@ services:
     image: qxip/sipp
     container_name: sippuas
     restart: always
+    volumes:
+      - "./sipp-scenarios:/scenarios"
     expose:
       - 3060
     ports:
@@ -16,6 +18,8 @@ services:
     depends_on:
       - sippuas
     restart: always
+    volumes:
+      - "./sipp-scenarios:/scenarios"
     expose:
       - 3062
     ports:
