@@ -3,25 +3,25 @@ services:
   sippuas:
     image: qxip/sipp
     container_name: sippuas
-    restart: always
+    restart: on-failure
     volumes:
       - "./sipp-scenarios:/scenarios"
     expose:
       - 3060
     ports:
       - "3060:3060/udp"
-    command: -p 3060 -sf /scenarios/sipp_uas_register_ignore.xml -m 100
+    command: -p 3060 -sf /scenarios/sipp_uas_register_ignore.xml -m 20
 
   sippuac:
     image: qxip/sipp
     container_name: sippuac
     depends_on:
       - sippuas
-    restart: always
+    restart: on-failure
     volumes:
       - "./sipp-scenarios:/scenarios"
     expose:
       - 3062
     ports:
       - "3062:3062/udp"
-    command: -p 3062 -sf /scenarios/sipp_uac_register_dumb.xml sippuas:3060 -m 100 -l 10 -inf /scenarios/register_data.csv
+    command: -p 3062 -sf /scenarios/sipp_uac_register_dumb.xml sippuas:3060 -m 20 -l 1 -inf /scenarios/register_data.csv

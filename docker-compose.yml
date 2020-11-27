@@ -3,25 +3,25 @@ services:
   sippuas:
     image: qxip/sipp
     container_name: sippuas
-    restart: always
+    restart: on-failure
     volumes:
       - "./sipp-scenarios:/scenarios"
     expose:
       - 3060
     ports:
       - "3060:3060/udp"
-    command: -p 3060 -sn uas
+    command: -p 3060 -sn uas -m 20
 
   sippuac:
     image: qxip/sipp
     container_name: sippuac
     depends_on:
       - sippuas
-    restart: always
+    restart: on-failure
     volumes:
       - "./sipp-scenarios:/scenarios"
     expose:
       - 3062
     ports:
       - "3062:3062/udp"
-    command: -p 3062 -sn uac sippuas:3060 -m 100 -l 10
+    command: -p 3062 -sn uac sippuas:3060 -m 20 -l 10
